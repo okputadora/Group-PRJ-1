@@ -1,0 +1,70 @@
+<html>
+
+<head>
+    <Title>Application Page</Title>
+</head>
+
+<body>
+    <h1>This is where we collect your interests</h1>
+    <div class="container">
+
+        <div id="cities">
+            <h2>List 5 cities</h2>
+            <form id="cities">
+                <input id="city1" />
+                <br>
+                <input id="city2" />
+                <br>
+                <input id="city3" />
+                <br>
+                <input id="city4" />
+                <br>
+                <input id="city5" />
+                <br>
+            </form>
+        </div>
+
+        <div id="interests">
+            <h2>interests</h2>
+            <form class="interests">
+
+                <input type="checkbox" name="interest" value="music">Music
+                <br>
+                <input type="checkbox" name="interest" value="sports">Sports
+                <br>
+                <input type="checkbox" name="interest" value="film">Film
+                <br>
+                <input type="checkbox" name="interest" value="theater">Theater
+                <br>
+                <input type="checkbox" name="interest" value="food">Food/Drink
+                <br>
+            </form>
+        </div>
+        <div id="dates">
+            <form class='dates'>
+                <input type="date" name="date" value="startDate">StartDate
+                <br>
+                <input type="date" name="date" value="endDate">EndDate
+                <br>
+            </form>
+        </div>
+        <!-- Not sure we need Hometown unless we give travel directions or serve up flight infoß -->
+        <div id="hometown">
+            <form class='dates'>
+                <input type="string" name="hometown" value="homeTown">Home Location
+                <br>
+        </div>
+        <button>Let's get some details</button>
+    </div>
+    <div class="Details"> 
+<!-- These will be populated by Javascript -->
+        <div id="bands"></div>
+        <div id="sports"></div>
+        <div id="music"></div>
+        <div id="film"></div>
+        <div id="theater"></div>
+        <button>Let's see what we've got</button>
+    </div>
+</body>
+
+</html>
