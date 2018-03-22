@@ -5,3 +5,7 @@ materialize.min.css
 #interests{
     float:left;
 }
+
+.interestTitle {
+    text-align: center;
+}
