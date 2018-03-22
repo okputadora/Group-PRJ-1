@@ -9,3 +9,8 @@ materialize.min.css
 .interestTitle {
     text-align: center;
 }
+
+.container {
+    align-items: center;
+    width: 90%;
+}
