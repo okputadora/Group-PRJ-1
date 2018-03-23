@@ -22,10 +22,11 @@ $.ajax({
 .error(function(error) {
   console.log('error!');
   response = JSON.parse(error.responseText)
+  console.log(response)
   var parsedResults = response.events.event.map(function(event){
     return ({
       title: event.title,
-      city: event.city,
+      city: event.city_name,
       description: event.description,
       venue: event.venue_name,
       lat: event.latitude,
