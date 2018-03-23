@@ -1,7 +1,8 @@
 
-
-var searchTerms = "SEARCH TERMS FROM THE FORM"
-
+// concerts sports food theater
+// var searchTerms = "SEARCH TERMS FROM THE FORM"
+// var location = "VACATION DESTINATIONS"
+// var dateRange = "DATE THE USER WANTS TO VACATION"
 
 //api key xmnsRKbacpmsh6ZB83cvLNMQc4LTp1Znb3fjsngAa5M9Bt400S
 var cors_api_url = 'https://cors-anywhere.herokuapp.com/';
@@ -16,8 +17,21 @@ $.ajax({
   console.log("sUCCES")
   console.log(data.responseText);
 })
+// Very strange...the response is coming to us in the error handler!!!
+// but its not an error!
 .error(function(error) {
-    console.log('error!');
-    response = JSON.parse(error.responseText)
-    console.log(response)
+  console.log('error!');
+  response = JSON.parse(error.responseText)
+  var parsedResults = response.events.event.map(function(event){
+    return ({
+      title: event.title,
+      city: event.city,
+      description: event.description,
+      venue: event.venue_name,
+      lat: event.latitude,
+      lon: event.longitude,
+      startTime: event.start_time
+    })
   })
+  console.log(parsedResults)
+})
