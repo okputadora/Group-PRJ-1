@@ -16,8 +16,16 @@ $(document).ready(function () {
     //if prop is checked save it
 
     $("#concerts").prop("checked")=true;
+<<<<<<< HEAD
 
 
 
 
 });//end document ready
+=======
+    
+
+
+
+});//end document ready
+>>>>>>> master
