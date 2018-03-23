@@ -14,3 +14,9 @@ materialize.min.css
     align-items: center;
     width: 90%;
 }
+
+#details {
+    background-color: rgb(55, 173, 241);
+    height: 50px;
+    
+}
