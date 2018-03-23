@@ -5,6 +5,12 @@ materialize.min.css
 #interests{
     float:left;
 }
-html{
-font-family: 'Roboto', sans-serif;
+
+.interestTitle {
+    text-align: center;
+}
+
+.container {
+    align-items: center;
+    width: 90%;
 }
