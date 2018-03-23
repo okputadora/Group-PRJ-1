@@ -11,6 +11,8 @@
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <link href="css/materialize.css" type="text/css" rel="stylesheet" media="screen,projection" />
     <link href="css/style.css" type="text/css" rel="stylesheet" media="screen,projection" />
+    <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
+
 </head>
 
 <body>
@@ -36,7 +38,7 @@
     </nav>
     <!-- Title -->
     <h1>This is where we collect your interests</h1>
-    <div class="container">
+    <div id="view1" class="container">
         <div class="row">
             <!-- City Picker Div -->
             <div id="cities" class="col s3">
@@ -115,22 +117,23 @@
             </div>
             <!-- At this time, not all pickadate.js options are working with our implementation -->
             <div id="dates" class="col s3">
-                    <h3>Date Picker</h3>
+                <h3>Date Picker</h3>
                 <form class='dates'>
 
                     <input type="text" class="datepicker">
                 </form>
             </div>
 
-        <!-- Not sure we need Hometown unless we give travel directions or serve up flight infoß -->
-        <div id="hometown" class="col s3">
+            <!-- Not sure we need Hometown unless we give travel directions or serve up flight infoß -->
+            <div id="hometown" class="col s3">
                 <h3>Home Town</h3>
-            <form class='hometown'>
-                <input type="string" name="hometown" value="homeTown">Home Location
-                <br>
+                <form class='hometown'>
+                    <input type="string" name="hometown" value="homeTown">Home Location
+                    <br>
+                </form>
+            </div>
         </div>
-    </div>
-        <button>Let's get some details</button>
+        <button id="details">Let's get some details</button>
     </div>
 
     <!-- FOOTER -->
@@ -186,7 +189,11 @@
             </div>
         </div>
     </footer>
-    <script src"js/javascript.js"></script>
+    <!-- Link to our file -->
+    <script src="/Users/macPRO/Group-PRJ-1/js/application.js"></script>
+    <!-- link to javascript -->
+    <script src="jquery-3.3.1.min.js"></script>
+
 </body>
 
 </html>
