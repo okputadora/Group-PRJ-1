@@ -11,6 +11,8 @@
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <link href="css/materialize.css" type="text/css" rel="stylesheet" media="screen,projection" />
     <link href="css/style.css" type="text/css" rel="stylesheet" media="screen,projection" />
+    <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
+
 </head>
 
 <body>
@@ -35,8 +37,8 @@
         </div>
     </nav>
     <!-- Title -->
-    <h1 class="interestTitle">This is where we collect your interests</h1>
-    <div class="container">
+    <h1>This is where we collect your interests</h1>
+    <div id="view1" class="container">
         <div class="row">
             <!-- City Picker Div -->
             <div id="cities" class="col s3">
@@ -124,10 +126,17 @@
 
             <!-- Not sure we need Hometown unless we give travel directions or serve up flight infoß -->
             <div id="hometown" class="col s3">
+<<<<<<< HEAD
                 <h4>Current Location</h4>
                 <form class='location'>
                     <input type="string" name="hometown" value="Please enter your location">
+=======
+                <h3>Home Town</h3>
+                <form class='hometown'>
+                    <input type="string" name="hometown" value="homeTown">Home Location
+>>>>>>> cba799f9e9569e45d75de641536f36addc9ba713
                     <br>
+                </form>
             </div>
         </div>
         <button id="details">Let's get some details</button>
@@ -186,7 +195,8 @@
             </div>
         </div>
     </footer>
-    <script src "js/javascript.js"></script>
+    <script src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
+    <script type="text/javascript"src="js/javascript.js"></script>
 </body>
 
 </html>
