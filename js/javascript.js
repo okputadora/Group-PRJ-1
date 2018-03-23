@@ -19,3 +19,32 @@ $.ajax({
   .done(function(data) {
     console.log(data);
   });
+
+
+
+  //Call to Amadeus API
+
+  // Example URL
+  // "https://api.sandbox.amadeus.com/v1.2/flights/extensive-search?apikey=0COdldqUIjt22sU7ABdhCSSmsYxU4JTa&origin=FRA&destination=LON&departure_date=2018-06-17&one-way=false&duration=7"
+
+  var apikey="?apikey=0COdldqUIjt22sU7ABdhCSSmsYxU4JTa";
+  var siteurl = "https://api.sandbox.amadeus.com/v1.2/flights/extensive-search";
+  // search parameters
+  // var org= "&origin="+$("#origin").val();  /* ABC */
+  // var dest="&destination="+$("#citi1").val();  /* XYZ */
+  // var depdate="&departure_date="+$("#startdt").val(); /* YYYY-mm-dd */
+
+  var org= "&origin=NYC";  /* ABC */
+  var dest="&destination=MIA";  /* XYZ */
+  var depdate="&departure_date=2018-07-15"; /* YYYY-mm-dd */
+  var type="&one-way=false"
+  var length = "&duration=7";
+
+  var searchurl= siteurl+apikey+org+dest+depdate+type+length;
+
+  $.ajax({
+      url: searchurl,
+      method: "GET"})
+      .then(function(response) {
+    console.log(response);
+      });
