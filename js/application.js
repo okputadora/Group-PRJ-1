@@ -80,11 +80,6 @@ $(document).ready(function () {
         $(".date").each(function () {
             if ($(this).val() !== "") {
                 var date = $(this).val();
-                console.log("this Date "+date);
-                var ourFormat = "DDMMMMY";
-                var convertedStartDate = moment(date, ourFormat);
-                var startDate = moment(convertedStartDate).format("YYYYMMDD");
-                console.log("start Date formated "+startDate);
 
                 var ourFormat = "DDMMMMY";
                 var convertedStartDate = moment(date, ourFormat);
@@ -94,9 +89,15 @@ $(document).ready(function () {
                 console.log("start date")
                 console.log(startDate)
 
+                console.log(date);
+                var ourFormat = "DDMMMMY";
+                var convertedStartDate = moment(date, ourFormat);
+                var startDate = moment(convertedStartDate).format("YYYYMMDD");
+                console.log(startDate);
+
                 var momentStart = moment(startDate);
                 var endDate=moment(momentStart).add(vacaLength, "day").format("YYYYMMDD");
-                console.log("end Date formated" + endDate);
+                console.log(endDate);
                 var range = {
                     startDate: convertedStartDate,
                     endDate: endDate,
