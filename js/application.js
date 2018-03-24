@@ -22,8 +22,9 @@ $(document).ready(function () {
         var cityArray=[];
         cityArray.push(city1,city2,city3,city4,city5);
         console.log(cityArray);
+        var cities="";
         $("#cityList").text(city1+"<br>");
-        localStorage.setItem(cityArray);
+        localStorage.setItem(cities,cityArray);
     });
 //DATE Button
     $('.datepicker').pickadate({
