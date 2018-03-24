@@ -34,19 +34,51 @@
             </a>
         </div>
     </nav>
-    <!-- Title -->
+    <!-- Vacation Results-->
     <h1 id="results">Your Results</h1>
     <div class="container">
         <div class="row">
-            <!-- Vacation Results Div-->
+            <!-- City Picker Div -->
             <div id="cities" class="col s9">
                 <h3>List 5 cities</h3>
                 <div class="row">
-                    
+                    <form id="cities">
+                        <div class="row">
+                            <div class="input-field col s6">
+                                <input placeholder="Placeholder" id="city1" type="text" class="validate">
+                                <label for="city1"></label>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="input-field col s6">
+                                <input placeholder="Placeholder" id="city2" type="text" class="validate">
+                                <label for="city2"></label>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="input-field col s6">
+                                <input placeholder="Placeholder" id="city3" type="text" class="validate">
+                                <label for="city3"></label>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="input-field col s6">
+                                <input placeholder="Placeholder" id="city4" type="text" class="validate">
+                                <label for="city4"></label>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="input-field col s6">
+                                <input placeholder="Placeholder" id="city5" type="text" class="validate">
+                                <label for="city5"></label>
+                            </div>
+                        </div>
+                    </form>
+                </div>
             </div>
             <!-- Interest Picker Div -->
             <div id="interests" class="col s3">
-                <h3>Filter</h3>
+                <h3>Interests</h3>
                 <div class="row">
                     <form id="interests" action="#">
                         <div class="row">
@@ -82,23 +114,8 @@
                 </div>
             </div>
             <!-- At this time, not all pickadate.js options are working with our implementation -->
-            <div id="dates" class="col s3">
-                    <h3>Date Picker</h3>
-                <form class='dates'>
-                    
-                    <input type="text" class="datepicker">
-                </form>
-            </div>
+           
         
-        <!-- Not sure we need Hometown unless we give travel directions or serve up flight infoß -->
-        <div id="hometown" class="col s3">
-                <h3>Home Town</h3>
-            <form class='hometown'>
-                <input type="string" name="hometown" value="homeTown">Home Location
-                <br>
-        </div>
-    </div>
-        <button>Let's get some details</button>
     </div>
 
     <!-- FOOTER -->
