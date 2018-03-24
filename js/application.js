@@ -85,6 +85,15 @@ $(document).ready(function () {
                 var convertedStartDate = moment(date, ourFormat);
                 var startDate = moment(convertedStartDate).format("YYYYMMDD");
                 console.log("start Date formated "+startDate);
+
+                var ourFormat = "DDMMMMY";
+                var convertedStartDate = moment(date, ourFormat);
+                console.log("convertedStartDate")
+                console.log(convertedStartDate)
+                var startDate = moment(convertedStartDate).add(vacaLength, "day")
+                console.log("start date")
+                console.log(startDate)
+
                 var momentStart = moment(startDate);
                 var endDate=moment(momentStart).add(vacaLength, "day").format("YYYYMMDD");
                 console.log("end Date formated" + endDate);
