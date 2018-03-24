@@ -1,13 +1,50 @@
+// City Autocomplete
 
-var city1 = $("#city1").val()
-var city2 = $("#city2").val()
-var city3 = $("#city3").val()
-var city4 = $("#city4").val()
-var city5 = $("#city5").val()
+$(window).on("load", function () {
 
-var searchTerms = "SEARCH TERMS FROM THE FORM"
-var location = "VACATION DESTINATIONS"
-var dateRange = "DATE THE USER WANTS TO VACATION"
+ function log(message) {
+   console.log(message);
+   console.log(typeof(message));
+   console.log(message.charAt(0));
+   $("#city1").val(message.charAt(0)); /* .prependTo($("#city1")); */
+   // $old("#city1").attr("id").scrollTop(0);
+ }
+
+ $(function () {
+   $old("#city1").autocomplete({
+     source: function (request, response) {
+       $.ajax({
+         url: "https://api.sandbox.amadeus.com/v1.2/airports/autocomplete",
+         dataType: "json",
+         data: {
+           apikey: "0COdldqUIjt22sU7ABdhCSSmsYxU4JTa",
+           term: request.term
+         },
+         success: function (data) {
+           response(data);
+         }
+       });
+     },
+     minLength: 3,
+     select: function (event, ui) {
+       console.log(ui);
+       console.log(ui.item.label);
+       console.log(ui.item.value);
+       // log(ui.item ? "Selected: " + ui.item.label: "Nothing selected, input was " + this.value);
+       log(ui.item.label);
+       // log(ui.item ?
+       //   "Selected: " + ui.item.label :
+       //   "Nothing selected, input was " + this.value);
+     },
+     open: function () {
+       $(this).removeClass("ui-corner-all").addClass("ui-corner-top");
+     },
+     close: function () {
+       $(this).removeClass("ui-corner-top").addClass("ui-corner-all");
+     }
+   });
+ });
+});
 
 //api key xmnsRKbacpmsh6ZB83cvLNMQc4LTp1Znb3fjsngAa5M9Bt400S
 var cors_api_url = 'https://cors-anywhere.herokuapp.com/';
