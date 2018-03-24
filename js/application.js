@@ -80,6 +80,7 @@ $(document).ready(function () {
         $(".date").each(function () {
             if ($(this).val() !== "") {
                 var date = $(this).val();
+<<<<<<< HEAD
                 var ourFormat = "DDMMMMY";
                 var convertedStartDate = moment(date, ourFormat);
                 console.log("convertedStartDate")
@@ -87,6 +88,13 @@ $(document).ready(function () {
                 var startDate = moment(convertedStartDate).add(vacaLength, "day")
                 console.log("start date")
                 console.log(startDate)
+=======
+                console.log(date);
+                var ourFormat = "DDMMMMY";
+                var convertedStartDate = moment(date, ourFormat);
+                var startDate = moment(convertedStartDate).format("YYYYMMDD");
+                console.log(startDate);
+>>>>>>> f4619356b2b9898aa0c87500561f4102e6d89836
                 var momentStart = moment(startDate);
                 var endDate=moment(momentStart).add(vacaLength, "day").format("YYYYMMDD");
                 console.log(endDate);
