@@ -61,19 +61,22 @@ $(document).ready(function () {
         // selectMonths: true,// Creates a dropdown to control month
         // selectYears: 15 // Creates a dropdown of 15 years to control year,
     });
-//Dates
+//Dates with MOMENT Conversion
     $("#dateBtn").on("click", function () {
         console.log("DatesBTN worked and files are linked")
         var startDate = $("#startDate").val();
         var endDate = $("#endDate").val();
-        var ourFormat= "MM/DD/YYYY";
-        var startDateFormat = moment(startDate, ourFormat);
-        var endDateFormat = moment(endDate, ourFormat);
-        console.log(startDate); //DD MONTH YYYYY
-        console.log(startDateFormat); //WUT???
+        var ourFormat= "DDMMMMY";
+        var convertedStart = moment(startDate, ourFormat);
+        var ourStart=moment(convertedStart).format("YYYYMMDD")
+        var convertedEnd = moment(endDate, ourFormat);
+        var ourEnd=moment(convertedEnd).format("YYYYMMDD")
+        console.log(startDate)
+        console.log(convertedStart)
+        console.log(ourStart); //DD MONTH YYYYY
         var dates = {
-            startDate: startDateFormat,
-            endDate: endDateFormat
+            startDate: ourStart,
+            endDate: ourEnd
         };
         console.log(dates);
     });
@@ -86,6 +89,7 @@ $("#homeBtn").on("click", function () {
     console.log("button worked and files are linked")
     var homeCity = $("#home").val().trim();
     console.log(homeCity);
+
 });
 function getLocation() {
     if (navigator.geolocation) {
@@ -94,12 +98,13 @@ function getLocation() {
         x.innerHTML = "Geolocation is not supported by this browser.";
     }
 }
-
+//lat and long positions happen behind the scenes
 function showPosition(position) {
     var latitude = position.coords.latitude;
     var longitude = position.coords.longitude;
     console.log(latitude);
     console.log(longitude);
+    var latlon = position.coords.latitude + "," + position.coords.longitude;
 }
 });
     //////
