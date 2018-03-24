@@ -4,14 +4,12 @@
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1.0" />
-    <title>Group Project</title>
+    <title>Starter Template - Materialize</title>
 
     <!-- CSS  -->
-    <!-- This (fonts googleapi) is to use Icons with Maerialize -->
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <link href="css/materialize.css" type="text/css" rel="stylesheet" media="screen,projection" />
     <link href="css/style.css" type="text/css" rel="stylesheet" media="screen,projection" />
-    <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
 
 </head>
 
@@ -37,103 +35,120 @@
         </div>
     </nav>
     <!-- Title -->
-    <h1>This is where we collect your interests</h1>
+    <div class="container center-align">
+        <h1>Let's get started!</h1>
+    </div>
+<!-- Main Container -->
     <div id="view1" class="container">
+<!-- Everything is in one Row -->
         <div class="row">
             <!-- City Picker Div -->
-            <div id="cities" class="col s3">
-                <h4>List 5 cities</h4>
+            <div id="cityDiv" class="col s3">
+                <h4>List 5 Cities</h4>
                 <div class="row">
-                    <form id="cities">
+                    <form id="cityForm">
                         <div class="row">
-                            <div class="input-field col s6">
-                                <input placeholder="Enter a City" id="city1" type="text" class="validate">
+                            <div class="input-field ">
+                                <input placeholder="Choice 1" id="city1" type="text" class="validate">
                                 <label for="city1"></label>
                             </div>
                         </div>
                         <div class="row">
-                            <div class="input-field col s6">
-                                <input placeholder="Enter a City" id="city2" type="text" class="validate">
+                            <div class="input-field ">
+                                <input placeholder="Choice 2" id="city2" type="text" class="validate">
                                 <label for="city2"></label>
                             </div>
                         </div>
                         <div class="row">
-                            <div class="input-field col s6">
-                                <input placeholder="Enter a City" id="city3" type="text" class="validate">
+                            <div class="input-field ">
+                                <input placeholder="Choice 3" id="city3" type="text" class="validate">
                                 <label for="city3"></label>
                             </div>
                         </div>
                         <div class="row">
-                            <div class="input-field col s6">
-                                <input placeholder="Enter a City" id="city4" type="text" class="validate">
+                            <div class="input-field ">
+                                <input placeholder="Choice 4" id="city4" type="text" class="validate">
                                 <label for="city4"></label>
                             </div>
                         </div>
                         <div class="row">
-                            <div class="input-field col s6">
-                                <input placeholder="Enter a City" id="city5" type="text" class="validate">
+                            <div class="input-field ">
+                                <input placeholder="Choice 5" id="city5" type="text" class="validate">
                                 <label for="city5"></label>
                             </div>
                         </div>
                     </form>
+                    <button id="cityBtn" class="btn waves-effect waves-light" type="submit" name="action">Submit
+             
+                    </button>
+                    <div id="cityResults"></div>
                 </div>
             </div>
             <!-- Interest Picker Div -->
-            <div id="interests" class="col s3">
+            <div id="interestDiv" class="col s3 ">
                 <h4>Interests</h4>
                 <div class="row">
-                    <form id="interests" action="#">
+                    <form id="interestForm" action="#">
                         <div class="row">
 
-                            <input type="checkbox" id="concerts" />
+                            <input type="checkbox" id="concerts" value="Live Music" />
                             <label for="concerts">Concerts</label>
 
                         </div>
                         <div class="row">
 
-                            <input type="checkbox" id="sports" />
+                            <input type="checkbox" id="sports" value="Sporting Events" />
                             <label for="sports">Sport Events</label>
 
                         </div>
                         <div class="row">
 
-                            <input type="checkbox" id="food" />
+                            <input type="checkbox" id="food" value="Food and Beverage Events" />
                             <label for="food">Food and Drink</label>
 
                         </div>
                         <div class="row">
 
-                            <input type="checkbox" id="theater" />
+                            <input type="checkbox" id="theater" value="Live Theater" />
                             <label for="theater">Theater</label>
 
                         </div>
                         <div class="row">
 
-                            <input type="checkbox" id="film" />
+                            <input type="checkbox" id="film" value="Film Events" />
                             <label for="film">Film and Movies</label>
                         </div>
                     </form>
+                    <button id="interestBtn" class="btn waves-effect waves-light" type="submit" name="action">Save Interests</button>
                 </div>
+                <div id="divResult"></div>
             </div>
             <!-- At this time, not all pickadate.js options are working with our implementation -->
-            <div id="dates" class="col s3">
+            <div id="dateDiv" class="col s3 ">
                 <h4>Date Picker</h4>
-                <form class='dates'>
+                <div class="input-field">
+                    <input id="startDate" type="text" name="startdate " class="datepicker ">
+                    <label for="startDate">Start Date</label>
+                </div>
+                <div class="input-field">
+                    <input id="endDate" type="text" name="enddate" class="datepicker">
+                    <label for="endDate">End Date</label>
+                </div>
+                <button id="dateBtn" class="btn waves-effect waves-light" type="submit" name="action">Save Dates</button>
 
-                    <input type="text" class="datepicker">
-                </form>
-            </div>
-
-            <!-- Not sure we need Hometown unless we give travel directions or serve up flight infoß -->
-            <div id="hometown" class="col s3">
-                <h3>Home Town</h3>
-                <form class='hometown'>
-                    <input type="string" name="hometown" value="homeTown">Home Location
-                    <br>
-                </form>
             </div>
         </div>
-        <button id="details">Let's get some details</button>
+
+        <!-- Not sure we need Hometown unless we give travel directions or serve up flight info -->
+        <div id="homeDiv" class="col s3">
+            <h4>Home Town</h4>
+            <form class='hometown'>
+                <input id="home" type="string" name="hometown" value="homeTown">
+            </form>
+            <button id="homeBtn" class="btn waves-effect waves-light" type="submit" name="action">Save Home</button>
+        </div>
+    </div>
+
     </div>
 
     <!-- FOOTER -->
@@ -189,8 +204,18 @@
             </div>
         </div>
     </footer>
+
+    <!--  Scripts from Materilize-->
     <script src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
-    <script type="text/javascript"src="js/javascript.js"></script>
+    <script src="js/materialize.js"></script>
+    <script src="js/init.js"></script>
+    <!-- OUR Application -->
+    <script src="js/application.js"></script>
+    <!-- FIREBASE -->
+    <script src="https://www.gstatic.com/firebasejs/4.12.0/firebase.js"></script>
+
+
+
 </body>
 
 </html>
