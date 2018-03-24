@@ -31,67 +31,82 @@ $(document).ready(function () {
         console.log(cities);
 
     });
-    //DATE Button
-
+ 
+//Interests
     $("#interestBtn").on("click", function () {
         console.log("Interests button worked and files are linked")
         var interests = [];
-        var categories = ["music", "sports", "theater"];
         var interest;
+        var categories = ["music", "sports", "theater"]
         $(".interest").each(function () {
             if ($(this).val() !== "") {
-                console.log(  (this) );
-
-                categories.forEach(function (cat) {
-                    if ($(this).hasClass(cat)) {
-                        console.log($(this).val());
-                        interest = {
-                            interestName: $(this).val(),
-                            category: cat
-                        };
-
-                    }
-                })
-
-                interests.push(interest);
-
+              for (i = 0; i < categories.length; i++){
+                if ($(this).hasClass(categories[i])) {
+                  var cat = categories[i]
+                  console.log(cat)
+                  interest = {
+                    interestName: $(this).val(),
+                    category: cat
+                  }
+                  interests.push(interest);
+                  break;
+                }
+              }
             }
-        });
-        console.log(interests);
-
-    });
+          })
+          console.log(interests)
+        })
 
     $('.datepicker').pickadate({
         // selectMonths: true,// Creates a dropdown to control month
         // selectYears: 15 // Creates a dropdown of 15 years to control year,
     });
+//Dates with MOMENT Conversion
     $("#dateBtn").on("click", function () {
-        console.log($("#startDate").val());
-        console.log($("#endDate").val());
+        console.log("DatesBTN worked and files are linked")
         var startDate = $("#startDate").val();
         var endDate = $("#endDate").val();
-        dateArray = [startDate, endDate];
+        var ourFormat= "DDMMMMY";
+        var convertedStart = moment(startDate, ourFormat);
+        var ourStart=moment(convertedStart).format("YYYYMMDD")
+        var convertedEnd = moment(endDate, ourFormat);
+        var ourEnd=moment(convertedEnd).format("YYYYMMDD")
+        console.log(startDate)
+        console.log(convertedStart)
+        console.log(ourStart); //DD MONTH YYYYY
+        var dates = {
+            startDate: ourStart,
+            endDate: ourEnd
+        };
+        console.log(dates);
     });
-    //HOME LOCATION Button
-    $("#homeBtn").on("click", function () {
-        console.log("button worked and files are linked")
-        var homeCity = $("#home").val().trim();
-        console.log(homeCity);
-    });
-    function getLocation() {
-        if (navigator.geolocation) {
-            navigator.geolocation.getCurrentPosition(showPosition);
-        } else {
-            x.innerHTML = "Geolocation is not supported by this browser.";
-        }
-    }
 
-    function showPosition(position) {
-        var latitude = position.coords.latitude;
-        var longitude = position.coords.longitude;
-        console.log(latitude);
-        console.log(longitude);
+
+
+
+//HOME LOCATION Button
+$("#homeBtn").on("click", function () {
+    console.log("button worked and files are linked")
+    var homeCity = $("#home").val().trim();
+    console.log(homeCity);
+
+});
+function getLocation() {
+    if (navigator.geolocation) {
+        navigator.geolocation.getCurrentPosition(showPosition);
+    } else {
+        x.innerHTML = "Geolocation is not supported by this browser.";
     }
+}
+//lat and long positions happen behind the scenes
+function showPosition(position) {
+    var latitude = position.coords.latitude;
+    var longitude = position.coords.longitude;
+    console.log(latitude);
+    console.log(longitude);
+    var latlon = position.coords.latitude + "," + position.coords.longitude;
+}
+});
     //////
 
 
@@ -116,8 +131,3 @@ $(document).ready(function () {
     //     } else {
     //         console.log("not checked");
     //     }
-
-
-
-
-});//end document ready
