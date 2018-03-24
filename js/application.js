@@ -79,10 +79,14 @@ $(document).ready(function () {
 
         $(".date").each(function () {
             if ($(this).val() !== "") {
-                var date = $("#this").val();
+                var date = $(this).val();
                 var ourFormat = "DDMMMMY";
                 var convertedStartDate = moment(date, ourFormat);
-                var startDate = moment(convertedStartDate).format("YYYYMMDD");
+                console.log("convertedStartDate")
+                console.log(convertedStartDate)
+                var startDate = moment(convertedStartDate).add(vacaLength, "day")
+                console.log("start date")
+                console.log(startDate)
                 var momentStart = moment(startDate);
                 var endDate=moment(momentStart).add(vacaLength, "day").format("YYYYMMDD");
                 console.log(endDate);
