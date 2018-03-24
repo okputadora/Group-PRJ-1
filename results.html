@@ -7,10 +7,16 @@
     <title>Group Project</title>
 
     <!-- CSS  -->
-    <!-- This (fonts googleapi) is to use Icons with Maerialize -->
+    <!-- This (fonts googleapi) is to use Icons with Materialize -->
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <link href="css/materialize.css" type="text/css" rel="stylesheet" media="screen,projection" />
     <link href="css/style.css" type="text/css" rel="stylesheet" media="screen,projection" />
+
+    <!-- jQuery Link -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+
+    <!-- Link to JS file -->
+    <script src="results.js"></script>
 </head>
 
 <body>
@@ -34,12 +40,12 @@
             </a>
         </div>
     </nav>
-    <!-- Title -->
-    <h1>Resutls</h1>
+    <!-- Vacation Results-->
+    <h1 id="results">Your Results</h1>
     <div class="container">
         <div class="row">
             <!-- City Picker Div -->
-            <div id="cities" class="col s3">
+            <div id="cities" class="col s9">
                 <h3>List 5 cities</h3>
                 <div class="row">
                     <form id="cities">
@@ -114,23 +120,8 @@
                 </div>
             </div>
             <!-- At this time, not all pickadate.js options are working with our implementation -->
-            <div id="dates" class="col s3">
-                    <h3>Date Picker</h3>
-                <form class='dates'>
-                    
-                    <input type="text" class="datepicker">
-                </form>
-            </div>
+           
         
-        <!-- Not sure we need Hometown unless we give travel directions or serve up flight infoß -->
-        <div id="hometown" class="col s3">
-                <h3>Home Town</h3>
-            <form class='hometown'>
-                <input type="string" name="hometown" value="homeTown">Home Location
-                <br>
-        </div>
-    </div>
-        <button>Let's get some details</button>
     </div>
 
     <!-- FOOTER -->
