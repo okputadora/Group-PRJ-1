@@ -28,7 +28,6 @@
     text-align: center;
 }
 
-
 .custom-input-container{
   background-color: #f9f9f9;
   margin-top: 50px;
@@ -47,7 +46,6 @@
   max-width: 85%;
   margin: auto;
 }
-
 
 body {
     display: flex;

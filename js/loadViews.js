@@ -18,10 +18,10 @@ var button = $("<div>").addClass("btn disables waves-effect waves-light margin30
 $(document).on("ready", function(){
   // fade in the first prompt
   $("#homeDiv").css("opacity", "1")
+
   // when the user starts typing their home town
   $("#home").on("keyup", function(){
     // if the input has something in it
-    console.log("in here")
     if ($("#home").val() !== ""){
       // then activate the button by removing the class 'disabled'
       $("#homeBtn").removeClass("disabled")
@@ -33,25 +33,26 @@ $(document).on("ready", function(){
     }
   })
 
-
   // when the user clicks the button -- note how this only works
   // when the button is enabled (i.e. it doesn't have the class "disabled")
-
   $("#homeBtn").on("click", function(e){
     // FORM VALIDATION SHOULD HAPPEN HERE
     e.preventDefault()
     loadNextPrompt($("#homeDiv"), $("#cityDiv"))
   })
+
   $("#cityBtn").on("click", function(e){
     // FORM VALIDATION SHOULD HAPPEN HERE
     e.preventDefault()
     loadNextPrompt($("#cityDiv"), $("#dateDiv"))
   })
+
   $("#dateBtn").on("click", function(e){
     // FORM VALIDATION SHOULD HAPPEN HERE
     e.preventDefault()
     loadNextPrompt($("#dateDiv"), $("#interestDiv"))
   })
+
   $("#interestBtn").on("click", function(e){
     // FORM VALIDATION SHOULD HAPPEN HERE
     e.preventDefault()
@@ -59,10 +60,8 @@ $(document).on("ready", function(){
     $("#interestDiv").css("margin-top", "-50px")
     // go to the results page
   })
-  function loadNextPrompt(currentPrompt, nextPrompt){
-    console.log(currentPrompt)
-    console.log(nextPrompt)
 
+  function loadNextPrompt(currentPrompt, nextPrompt){
     // fade out the homeDiv
     currentPrompt.css("opacity", "0")
     currentPrompt.css("margin-top", "-50px")
@@ -77,7 +76,6 @@ $(document).on("ready", function(){
         nextPrompt.css("opacity", "1")
         nextPrompt.css("margin-top", "0px")
       }, 600)
-
     }, 300)
   }
 })
