@@ -1,18 +1,57 @@
 $(document).ready(function () {
-    //firebase commented out for the time beinginterestForm
-    // var config = {
-    //     apiKey: "AIzaSyD45BBdEbVt8n7x_oiBYMCbmw4pTZtt3jM",
-    //     authDomain: "groupapplication-f576b.firebaseapp.com",
-    //     databaseURL: "https://groupapplication-f576b.firebaseio.com",
-    //     projectId: "groupapplication-f576b",
-    //     storageBucket: "",
-    //     messagingSenderId: "573680163830"
-    //   };
-    //   firebase.initializeApp(config);
 
     event.preventDefault();
-    //LOCATION Button
 
+    $(window).on("load", function () {
+
+        function log(message) {
+            console.log(message);
+            console.log(typeof (message));
+            console.log(message.charAt(0));
+            //switching selector from "#city1" to class selector ".city"
+            $(".city").val(message.charAt(0)); /* .prependTo($("#city1")); */
+            // $old("#city1").attr("id").scrollTop(0);
+        }
+
+        $(function () {
+            $old(".city").autocomplete({
+                source: function (request, response) {
+                    $.ajax({
+                        url: "https://api.sandbox.amadeus.com/v1.2/airports/autocomplete",
+                        dataType: "json",
+                        data: {
+                            apikey: "0COdldqUIjt22sU7ABdhCSSmsYxU4JTa",
+                            term: request.term
+                        },
+                        success: function (data) {
+                            response(data);
+                        }
+                    });
+                },
+                minLength: 3,
+                select: function (event, ui) {
+                    console.log(ui);
+                    console.log(ui.item.label);
+                    console.log(ui.item.value);
+                    // log(ui.item ? "Selected: " + ui.item.label: "Nothing selected, input was " + this.value);
+                    log(ui.item.label);
+                    // log(ui.item ?
+                    //   "Selected: " + ui.item.label :
+                    //   "Nothing selected, input was " + this.value);
+                },
+                open: function () {
+                    $(this).removeClass("ui-corner-all").addClass("ui-corner-top");
+                },
+                close: function () {
+                    $(this).removeClass("ui-corner-top").addClass("ui-corner-all");
+                }
+            });
+        });
+    });
+    //
+    //************
+    //CITY LOCATION CODE
+    //************
     $("#cityBtn").on("click", function () {
         console.log("button worked and files are linked")
         var cities = [];
@@ -29,8 +68,11 @@ $(document).ready(function () {
             }
         });
         console.log(cities);
-
+        //local storage done in pairs or stings
+        var storedCities = JSON.stringify(city);
+        localStorage.setItem("cities", "storedCities");
     });
+
 
     //Interests
     $("#interestBtn").on("click", function () {
@@ -57,6 +99,9 @@ $(document).ready(function () {
         console.log(interests)
     })
 
+    //************
+    //DATE and range code
+    //************
     $('.datepicker').pickadate({
         // selectMonths: true,// Creates a dropdown to control month
         // selectYears: 15 // Creates a dropdown of 15 years to control year,
@@ -80,11 +125,11 @@ $(document).ready(function () {
         $(".date").each(function () {
             if ($(this).val() !== "") {
                 var date = $(this).val();
-                console.log("this Date "+date);
+                console.log("this Date " + date);
                 var ourFormat = "DDMMMMY";
                 var convertedStartDate = moment(date, ourFormat);
                 var startDate = moment(convertedStartDate).format("YYYYMMDD");
-                console.log("start Date formated "+startDate);
+                console.log("start Date formated " + startDate);
 
                 var ourFormat = "DDMMMMY";
                 var convertedStartDate = moment(date, ourFormat);
@@ -95,7 +140,7 @@ $(document).ready(function () {
                 console.log(startDate)
 
                 var momentStart = moment(startDate);
-                var endDate=moment(momentStart).add(vacaLength, "day").format("YYYYMMDD");
+                var endDate = moment(momentStart).add(vacaLength, "day").format("YYYYMMDD");
                 console.log("end Date formated" + endDate);
                 var range = {
                     startDate: convertedStartDate,
@@ -109,15 +154,17 @@ $(document).ready(function () {
     });
 
 
-
-
-    //HOME LOCATION Button
+    //************
+    //HomeLocation Code
+    //************
     $("#homeBtn").on("click", function () {
         console.log("button worked and files are linked")
         var homeCity = $("#home").val().trim();
         console.log(homeCity);
-
     });
+    //************
+    //get Long and Lat of current computer location
+    //************
     function getLocation() {
         if (navigator.geolocation) {
             navigator.geolocation.getCurrentPosition(showPosition);
@@ -133,28 +180,10 @@ $(document).ready(function () {
         console.log(longitude);
         var latlon = position.coords.latitude + "," + position.coords.longitude;
     }
+
+    //************
+    //Take Long and Lat of current computer location and get city and airport code
+    //no code yet
+    //************
+
 });
-    //////
-
-
-    // $('#interestList').click(function () {
-    //     var result = $('input[type="checkbox"]:checked');
-    //     if (result.length > 0) {
-    //         var resultString = result.length + " checkboxe(s) checked<br/>";
-    //         result.each(function () {
-    //             resultString += $(this).val() + "<br/>";
-    //         });
-    //         $('#divResult').html(resultString);
-    //     }
-    //     else {
-    //         $('#divResult').html("No checkbox checked");
-    //     }
-    // });
-    //     //let's get our intersts in order
-    //     $('input[type="checkbox"]:checked')
-    //     var concerts=$("#concerts").prop('checked', true);
-    //     if (concerts == true) {
-    //         console.log("is checked");
-    //     } else {
-    //         console.log("not checked");
-    //     }
