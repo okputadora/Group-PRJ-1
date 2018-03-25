@@ -96,7 +96,7 @@ $(document).ready(function () {
         })
         console.log(interests)
         // add to local storage
-        localStorage.setItem("interests", interests)
+        localStorage.setItem("interests", JSON.stringify(interests))
     })
 
     //************
@@ -134,7 +134,7 @@ $(document).ready(function () {
         });
         console.log(ranges);
         // add to localstorage
-        localStorage.setItem("dateRanges", ranges)
+        localStorage.setItem("dateRanges", JSON.stringify(ranges))
     });
 
 
