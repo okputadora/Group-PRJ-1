@@ -11,17 +11,12 @@ $(document).ready(function () {
     //   firebase.initializeApp(config);
 
     event.preventDefault();
-    //LOCATION Button
 
-<<<<<<< HEAD
-    $("#concerts").prop("checked")=true;
-=======
+    //LOCATION Button
     $("#cityBtn").on("click", function () {
         console.log("button worked and files are linked")
         var cities = [];
         var rank = 1;
->>>>>>> master
-
         $(".city").each(function () {
             if ($(this).val() !== "") {
                 var city = {
@@ -33,13 +28,8 @@ $(document).ready(function () {
             }
         });
         console.log(cities);
-
     });
-
-<<<<<<< HEAD
-
-});//end document ready
-=======
+});
     //Interests
     $("#interestBtn").on("click", function () {
         console.log("Interests button worked and files are linked")
@@ -142,7 +132,7 @@ $(document).ready(function () {
         console.log(longitude);
         var latlon = position.coords.latitude + "," + position.coords.longitude;
     }
-});
+
     //////
 
 
@@ -167,4 +157,3 @@ $(document).ready(function () {
     //     } else {
     //         console.log("not checked");
     //     }
->>>>>>> master
