@@ -11,20 +11,4 @@ $(document).on("ready", function () {
     //   firebase.initializeApp(config);
 
     //Copied over from Tony's file
-    $(function () {
-        $old(".city").autocomplete({
-            source: function (request, response) {
-                $.ajax({
-                    url: "https://www.google.com/maps/@?api=1&map_action=map&parameters",
-                    dataType: "json",
-                    data: {
-                        apikey: "AIzaSyCYUN28qqTKuwxF_I12PmuRvAQ6MqbmUDk",
-                        term: request.term
-                    },
-                    success: function (data) {
-                        response(data);
-                    }
-                });
-            },
-        })
-    })
+    
