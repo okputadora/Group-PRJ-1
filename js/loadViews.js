@@ -52,9 +52,11 @@ $(document).on("ready", function(){
     e.preventDefault()
     loadNextPrompt($("#dateDiv"), $("#interestDiv"))
   })
-  $("#interestDiv").on("click", function(e){
+  $("#interestBtn").on("click", function(e){
     // FORM VALIDATION SHOULD HAPPEN HERE
     e.preventDefault()
+    $("#interestDiv").css("opacity", "0")
+    $("#interestDiv").css("margin-top", "-50px")
     // go to the results page
   })
   function loadNextPrompt(currentPrompt, nextPrompt){
@@ -63,6 +65,7 @@ $(document).on("ready", function(){
 
     // fade out the homeDiv
     currentPrompt.css("opacity", "0")
+    currentPrompt.css("margin-top", "-50px")
     // wait until it fades out
     setTimeout(function(){
       // then remove it
@@ -72,8 +75,9 @@ $(document).on("ready", function(){
       // fade in the new window
       setTimeout(function(){
         nextPrompt.css("opacity", "1")
-      }, 300)
+        nextPrompt.css("margin-top", "0px")
+      }, 600)
 
-      }, 1000)
+    }, 300)
   }
 })
