@@ -108,17 +108,16 @@ $(document).on("ready", function(){
             //}
             // and if this is the last interest of the last date window
             // then push the date window to datewindow list
-            // and then if this is the last city put the whole thing to the 
-          }
+            // and then if this is the last city put the whole thing to the
+          })
           })
         })
 
       })
       vacations.push(vacation)
+      setTimeout(function(){
+        console.log("VACATIONS")
+        console.log(vacations)
+      }, 10000)
     })
-    setTimeout(function(){
-      console.log("VACATIONS")
-      console.log(vacations)
-    }, 10000)
   })
-})
