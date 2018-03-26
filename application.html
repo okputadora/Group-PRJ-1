@@ -48,7 +48,8 @@
               <h4 class="orange-text">where do you live?</h4>
               <form class='hometown'>
                 <div class="input-field">
-                  <input id="home" type="text" name="hometown" placeholder="home town" class="center validate">
+                  <input id="home" type="text" name="hometown" placeholder="home town" class="center cityComplete validate">
+                  <label id="homeresp"></label>
                 </div>
               </form>
               <button id="homeBtn" class="btn disabled waves-effect waves-light margin30" type="submit" name="action">continue</button>
@@ -59,30 +60,30 @@
                 <form id="cityForm">
                   <div class="row ">
                     <div class="input-field">
-                      <input placeholder="Philadelphia" id="city1" type="text" class="center validate city custom-width-85" />
+                      <input placeholder="Philadelphia" id="city1" type="text" class="center validate city cityComplete custom-width-85" />
                       <label for="city1"></label>
                     </div>
                   </div>
                   <div class="row">
                     <div class="input-field ">
-                      <input placeholder="Paris" id="city2" type="text" class="center validate city custom-width-85" />
+                      <input placeholder="Paris" id="city2" type="text" class="center validate city cityComplete custom-width-85" />
                       <label for="city2"></label>
                     </div>
                   </div>
                   <div class="row">
                     <div class="input-field ">
-                      <input placeholder="Phoenix" id="city3" type="text" class="center validate city custom-width-85" />
+                      <input placeholder="Phoenix" id="city3" type="text" class="center validate city cityComplete custom-width-85" />
                     </div>
                   </div>
                   <div class="row">
                     <div class="input-field ">
-                      <input placeholder="etc.." id="city4" type="text" class="center validate city custom-width-85" />
+                      <input placeholder="etc.." id="city4" type="text" class="center validate city cityComplete custom-width-85" />
                       <label for="city4"></label>
                     </div>
                   </div>
                   <div class="row">
                     <div class="input-field ">
-                      <input placeholder="..." id="city5" type="text" class="center validate city custom-width-85" />
+                      <input placeholder="..." id="city5" type="text" class="center validate city cityComplete custom-width-85" />
                       <label for="city5"></label>
                     </div>
                   </div>
@@ -259,11 +260,15 @@
 
     <!--  Scripts from Materilize-->
     <script src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.3.1.js"></script>
+
+    <script src="http://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
     <script src="js/materialize.js"></script>
     <script src="js/init.js"></script>
     <!-- OUR Application -->
     <script src="js/application.js"></script>
     <script src="js/loadViews.js"></script>
+    <script src="js/javascript.js"></script>
     <!-- FIREBASE -->
     <script src="https://www.gstatic.com/firebasejs/4.12.0/firebase.js"></script>
     <!-- MOMENT -->

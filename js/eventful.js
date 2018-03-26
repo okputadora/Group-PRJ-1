@@ -80,9 +80,9 @@ var api_key = 'qmFPcpp4ZnChQdF5';
       })
     }
     function appendInterests(vacation, dateIndex, callback){
-      console.log("appending interests")
-      console.log(cities)
+      console.log("category:")
       var interest = interests.shift()
+      console.log(interest.category)
       interest = {
         interestName: interest.interestName,
         interestCategory: interest.category,
@@ -104,6 +104,7 @@ var api_key = 'qmFPcpp4ZnChQdF5';
         // we'll have to do our own error handling
         response = JSON.parse(error.responseText)
         if (response.events){
+          console.log(response.events.event)
           var parsedResults = response.events.event.map(function(event){
             return ({
               title: event.title,
