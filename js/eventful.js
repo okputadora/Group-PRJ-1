@@ -78,7 +78,7 @@ $(document).on("ready", function(){
       var interest = interests.shift()
       interest = {
         interestName: interest.interestName,
-        interestCategory: interest.interestCategory,
+        interestCategory: interest.category,
         events: []
       }
       // get events from API
@@ -102,24 +102,26 @@ $(document).on("ready", function(){
         // we'll have to do our own error handling
         response = JSON.parse(error.responseText)
         console.log(response)
-        var parsedResults = response.events.event.map(function(event){
-          return ({
-            title: event.title,
-            city: event.city_name,
-            state: event.region_name,
-            description: event.description,
-            venue: event.venue_name,
-            venueAddress: event.venue_address,
-            venueUrl: event.venue_url,
-            lat: event.latitude,
-            lon: event.longitude,
-            startTime: event.start_time
+        if (response.events){
+          var parsedResults = response.events.event.map(function(event){
+            return ({
+              title: event.title,
+              city: event.city_name,
+              state: event.region_name,
+              description: event.description,
+              venue: event.venue_name,
+              venueAddress: event.venue_address,
+              venueUrl: event.venue_url,
+              lat: event.latitude,
+              lon: event.longitude,
+              startTime: event.start_time
+            })
           })
-        })
-        // add the results to our interes object
-        interest.events = parsedResults
-        // and add our interest object to our vacation object
-        vacation.dateWindows[dateIndex].interests.push(interest)
+          // add the results to our interes object
+          interest.events = parsedResults
+          // and add our interest object to our vacation object
+          vacation.dateWindows[dateIndex].interests.push(interest)
+        }
         if (interests.length !== 0){
           appendInterests(vacation, dateIndex, callback)
         }

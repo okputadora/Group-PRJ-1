@@ -60,6 +60,19 @@ $(document).on("ready", function(){
     $("#interestDiv").css("margin-top", "-50px")
     setTimeout(function(){
       $("#main-container").empty()
+      $("#main-container")
+      // add loading message
+      .append(`<div class="preloader-wrapper big active">
+                <div class="spinner-layer spinner-blue-only">
+                  <div class="circle-clipper left">
+                    <div class="circle"></div>
+                  </div><div class="gap-patch">
+                    <div class="circle"></div>
+                  </div><div class="circle-clipper right">
+                    <div class="circle"></div>
+                  </div>
+                </div>
+              </div>`)
     }, 500)
     // go to the results page
   })
