@@ -17,8 +17,6 @@
 
     <!-- Link to JS file -->
     <script src="results.js"></script>
-
-
 </head>
 
 <body>
@@ -50,62 +48,37 @@
             <div id="cities" class="col s9">
                 <h4>Map Your Events</h4>
                 <div class="row">
-
-
-
-                    <style>
-                        #map {
-                            height: 400px;
-                            width: 100%;
-                        }
-                    </style>
-                    <h3>My Google Maps Demo</h3>
-                    <div id="map"></div>
-                    <script>
-                        function initMap() {
-                            var uluru = { lat: -25.363, lng: 131.044 };
-                            var map = new google.maps.Map(document.getElementById('map'), {
-                                zoom: 4,
-                                center: uluru
-                            });
-                            var marker = new google.maps.Marker({
-                                position: uluru,
-                                map: map
-                            });
-                        }
-                    </script>
-                    <script async defer src="https://maps.googleapis.com/maps/api/js?key='AIzaSyCYUN28qqTKuwxF_I12PmuRvAQ6MqbmUDk',&callback=initMap">
-                    </script>
+                    
                 </div>
             </div>
-            <!-- Filter-->
-            <div id="Filter" class="col s3">
+            <!-- Interest Picker Div -->
+            <div id="interests" class="col s3">
                 <h4>Sort by:</h4>
                 <div class="row">
-                    <form action="#">
+                    <form action="Filter">
                         <p>
-                            <input name="Rank" type="radio" id="citiesRank" />
-                            <label for="test1">Rank</label>
+                          <input name="group1" type="radio" id="citiesRank" />
+                          <label for="test1">Rank</label>
                         </p>
                         <p>
-                            <input name="Price" type="radio" id="Price" />
-                            <label for="test2">Price</label>
+                          <input name="group1" type="radio" id="Price" />
+                          <label for="test2">Price</label>
                         </p>
                         <p>
-                            <input class="Interests" name="group1" type="radio" id="Interests" />
-                            <label for="test3">Interests</label>
+                          <input class="with-gap" name="group1" type="radio" id="Interests"  />
+                          <label for="test3">Interests</label>
                         </p>
                         <p>
-                            <input name="Date" type="radio" id="Dates" />
-                            <label for="test4">Dates</label>
+                          <input name="group1" type="radio" id="Dates" />
+                          <label for="test4">Dates</label>
                         </p>
-                    </form>
-                </div>
+                      </form>
             </div>
-        </div>
-
-
-
+            </div>
+            </div>
+            <!-- At this time, not all pickadate.js options are working with our implementation -->
+           
+        
     </div>
 
     <!-- FOOTER -->

@@ -1,4 +1,4 @@
-$(document).on("ready", function () {
+$(document).on("ready", function(){
     //Copied from application.js 
     // var config = {
     //     apiKey: "AIzaSyD45BBdEbVt8n7x_oiBYMCbmw4pTZtt3jM",
@@ -10,5 +10,4 @@ $(document).on("ready", function () {
     //   };
     //   firebase.initializeApp(config);
 
-    //Copied over from Tony's file
-    
+})
