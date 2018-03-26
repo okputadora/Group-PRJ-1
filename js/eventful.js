@@ -44,6 +44,7 @@ $(document).on("ready", function(){
         else {
           console.log("===============END RESULT==============")
           console.log(vacations)
+          // SEND TO FIREBASE
         }
       })
     }

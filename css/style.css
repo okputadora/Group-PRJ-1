@@ -28,6 +28,28 @@
     text-align: center;
 }
 
+#map {
+    height: 85vh;
+    width: 100%;
+}
+
+.map-zoom-out-button{
+  position: fixed;
+  top: 140px;
+  right: 200px;
+}
+
+#loader {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  width: 400px;
+  height: 300px;
+  z-index: 100;
+  background: #f9f9f9;
+  border-radius: 4px;
+  opacity: .7;
+}
 .custom-input-container{
   background-color: #f9f9f9;
   margin-top: 50px;
