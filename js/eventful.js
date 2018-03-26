@@ -2,11 +2,7 @@
 var cors_api_url = 'https://cors-anywhere.herokuapp.com/';
 var api_key = 'qmFPcpp4ZnChQdF5';
 
-
-$(document).on("ready", function(){
-
   console.log("connected")
-  $("#interestBtn").on("click", function(){
     // get the data from local storage
     var cities = JSON.parse(localStorage.cities)
     var homeCity = JSON.parse(localStorage.dateRanges)
@@ -18,7 +14,9 @@ $(document).on("ready", function(){
     function appendCity(){
       console.log("appending City")
       // remove one city from the list
+      console.log(cities)
       city = cities.shift()
+      console.log("cities")
       // create a new vacation object and add the city to it
       var vacation = {
         city: city,
@@ -31,6 +29,9 @@ $(document).on("ready", function(){
       appendDates(vacation, dateIndex, function(){
         // add the vacation to the list of possible vacations
         vacations.push(vacation)
+        console.log("inside the appendDates callback")
+        console.log(cities)
+        console.log(cities.length)
         // if there are more cities repeat the process
         if (cities.length !== 0){
           // reset the dateRanges.
@@ -44,7 +45,8 @@ $(document).on("ready", function(){
         else {
           console.log("===============END RESULT==============")
           console.log(vacations)
-          // SEND TO FIREBASE
+          // remove loading window
+          $("#loader").remove()
         }
       })
     }
@@ -70,12 +72,16 @@ $(document).on("ready", function(){
           appendDates(vacation, dateIndex, callback)
         }
         else{
+          console.log("got all the date windows for this city")
+          console.log("going to get the next city")
+          console.log(cities)
           callback()
         }
       })
     }
     function appendInterests(vacation, dateIndex, callback){
       console.log("appending interests")
+      console.log(cities)
       var interest = interests.shift()
       interest = {
         interestName: interest.interestName,
@@ -87,22 +93,16 @@ $(document).on("ready", function(){
       console.log(vacation)
       var api_url = 'http://api.eventful.com/json/events/search?app_key='+ api_key+
       '&keywords='+interest.interestName +
-      '&category='+interest.interestCategory +
+      '&category='+interest.category +
       '&location='+ vacation.city.cityName +
       '&date='+ vacation.dateWindows[dateIndex].startDate+"00-"+vacation.dateWindows[dateIndex].endDate + '00';
-      console.log(api_url)
       var request_url = cors_api_url + api_url;
       $.ajax({
         url: request_url,
-        context: document.body
-      })
-      .done(function(data){
-        console.log(data.responseText);
       })
       .error(function(error) {
         // we'll have to do our own error handling
         response = JSON.parse(error.responseText)
-        console.log(response)
         if (response.events){
           var parsedResults = response.events.event.map(function(event){
             return ({
@@ -128,6 +128,7 @@ $(document).on("ready", function(){
         }
         else {callback()}
       })
+      .done(function(data){
+        console.log(data.responseText);
+      })
     }
-  })
-})

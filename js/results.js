@@ -1,8 +1,8 @@
-var cities = JSON.parse(localStorage.cities)
+var displayCities = JSON.parse(localStorage.cities)
 coordsList = []
 function initMap() {
   // get coords for all the cities
-  getCoords(cities, function(){
+  getCoords(displayCities, function(){
     var map = new google.maps.Map(document.getElementById('map'), {
       zoom: 4.5,
       center: {lat: 38.850033, lng: -97.6500523}
@@ -39,8 +39,8 @@ function initMap() {
 
 }
 
-function getCoords(cities, callback){
-  city = cities.shift()
+function getCoords(displayCities, callback){
+  city = displayCities.shift()
   $.ajax({
     url: "https://maps.googleapis.com/maps/api/geocode/json?address="+city.cityName+"&key=AIzaSyCYUN28qqTKuwxF_I12PmuRvAQ6MqbmUDk&callback"
   })
@@ -50,8 +50,8 @@ function getCoords(cities, callback){
     lng = coords.lng
     coords = {lat: lat, lng: lng}
     coordsList.push(coords)
-    if (cities.length !== 0){
-      getCoords(cities, callback)
+    if (displayCities.length !== 0){
+      getCoords(displayCities, callback)
     }
     else{
       console.log(coordsList)
@@ -69,27 +69,27 @@ function displayCityDetails(currentCity){
   // get the data for this vacation
   console.log(localStorage.vacations)
 }
-// $("#loader").append(`<div class="preloader-wrapper big active">
-//           <div class="spinner-layer spinner-blue-only">
-//             <div class="circle-clipper left">
-//               <div class="circle"></div>
-//             </div><div class="gap-patch">
-//               <div class="circle"></div>
-//             </div><div class="circle-clipper right">
-//               <div class="circle"></div>
-//             </div>
-//           </div>
-//         </div>
-//         <div id="loadingMessages"></div>`)
-//
-// var loadingMessages = ["Your results are being calculated...",
-//   "finding events that match your interests...",
-//   "optimzing the best vacation"]
-// index = 0
-// $("#loadingMessages")
-// setInterval(function(){
-//   $("#loadingMessages").html(loadingMessages[index])
-//   index++
-//   // check if the results are in
-//
-// }, 3000)
+$("#loader").append(`<div class="preloader-wrapper big active margin30">
+          <div class="spinner-layer spinner-blue-only">
+            <div class="circle-clipper left">
+              <div class="circle"></div>
+            </div><div class="gap-patch">
+              <div class="circle"></div>
+            </div><div class="circle-clipper right">
+              <div class="circle"></div>
+            </div>
+          </div>
+        </div>
+        <div id="loadingMessages"></div>`)
+
+var loadingMessages = ["Your results are being calculated...",
+  "finding events that match your interests...",
+  "optimzing the best vacation"]
+index = 0
+$("#loadingMessages")
+setInterval(function(){
+  $("#loadingMessages").html(loadingMessages[index])
+  index++
+  // check if the results are in
+
+}, 3000)
