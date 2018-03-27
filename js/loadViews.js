@@ -1,27 +1,13 @@
-// these are some resuable pieces we'll use to create our DOM elements
-var interestsContainer = $("<ul>").addClass("collapsible")
-var listElem = $("<li>")
-var header = $("<div>").addClass("collapsible-header")
-var icon = $("<i>")
-header.append(icon)
-var body = $("<div>").addClass("collapsible-body")
-var input = $("<input>")
-var label = $("<label>")
-var title = $("<h4>")
-var p = $("<p>")
-var row = $("<div>").addClass("row")
-var button = $("<div>").addClass("btn disables waves-effect waves-light margin30")
-
-
-// Or with jQuery
-
-$(document).on("ready", function(){
+console.log("connected")
+$(window).on("load", function(){
+  console.log("READY!")
   // fade in the first prompt
   $("#homeDiv").css("opacity", "1")
 
   // when the user starts typing their home town
   $("#home").on("keyup", function(){
     // if the input has something in it
+    console.log("in here")
     if ($("#home").val() !== ""){
       // then activate the button by removing the class 'disabled'
       $("#homeBtn").removeClass("disabled")

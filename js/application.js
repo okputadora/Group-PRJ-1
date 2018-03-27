@@ -1,75 +1,16 @@
+// this file is solely for converting form inputs into localstorage
 $(document).ready(function () {
-    //  TONYS CODE
-    // $(window).on("load", function () {
-    //
-    //     function log(message) {
-    //         console.log(message);
-    //         console.log(typeof (message));
-    //         console.log(message.charAt(0));
-    //         //switching selector from "#city1" to class selector ".city"
-    //         $(".city").val(message.charAt(0)); /* .prependTo($("#city1")); */
-    //         // $old("#city1").attr("id").scrollTop(0);
-    //     }
-    //
-    //     $(function () {
-    //         $old(".city").autocomplete({
-    //             source: function (request, response) {
-    //                 $.ajax({
-    //                     url: "https://api.sandbox.amadeus.com/v1.2/airports/autocomplete",
-    //                     dataType: "json",
-    //                     data: {
-    //                         apikey: "0COdldqUIjt22sU7ABdhCSSmsYxU4JTa",
-    //                         term: request.term
-    //                     },
-    //                     success: function (data) {
-    //                         response(data);
-    //                     }
-    //                 });
-    //             },
-    //             minLength: 3,
-    //             select: function (event, ui) {
-    //                 console.log(ui);
-    //                 console.log(ui.item.label);
-    //                 console.log(ui.item.value);
-    //                 // log(ui.item ? "Selected: " + ui.item.label: "Nothing selected, input was " + this.value);
-    //                 log(ui.item.label);
-    //                 // log(ui.item ?
-    //                 //   "Selected: " + ui.item.label :
-    //                 //   "Nothing selected, input was " + this.value);
-    //             },
-    //             open: function () {
-    //                 $(this).removeClass("ui-corner-all").addClass("ui-corner-top");
-    //             },
-    //             close: function () {
-    //                 $(this).removeClass("ui-corner-top").addClass("ui-corner-all");
-    //             }
-    //         });
-    //     });
-    // // });
-    // //
-    //************
-    //CITY LOCATION CODE
-    //************
     $("#cityBtn").on("click", function () {
-        console.log("button worked and files are linked")
         var cities = [];
-        var rank = 1;
-
-
         $(".city").each(function () {
             if ($(this).val() !== "") {
                 var city = {
-                    rank: rank,
                     cityName: $(this).val(),
                 };
                 cities.push(city);
-                rank++;
             }
         });
-        console.log(cities);
-        //local storage done in pairs or stings
-        var storedCities = JSON.stringify(cities);
-        localStorage.setItem("cities", storedCities);
+        localStorage.setItem("cities", JSON.stringify(cities));
         console.log(localStorage)
     });
 
@@ -110,9 +51,11 @@ $(document).ready(function () {
     $("#dateBtn").on("click", function () {
         //keep this vacaLenght
         var vacaLength = parseInt($("#vacaLength").val().trim());
-        var ranges = [];
-
+        var eventfulRanges = [];
+        var amadeusRanges = [];
         $(".date").each(function () {
+          // convert date for eventful api format
+          // and different format for amadeus api
             if ($(this).val() !== "") {
                 var date = $(this).val();
                 var ourFormat = "DDMMMMY";
@@ -121,20 +64,31 @@ $(document).ready(function () {
                 // use this moment to get a string of the start date
                 // in the format we want for storage
                 var startDate = startMoment.format("YYYYMMDD");
+                var departureDate = startMoment.format("YYYY-MM-DD")
                 // use the original moment object to calculate the end date
                 // and format it at the same time
-                var endDate = startMoment.add(vacaLength, "day").format("YYYYMMDD")
-                var range = {
+                var endDate = startMoment.add(vacaLength, "day")
+                var returnDate = endDate.format("YYYY-MM-DD")
+                var endDate = endDate.format("YYYYMMDD")
+                var eventfulRange = {
                     startDate: startDate,
                     endDate: endDate,
                 };
-                ranges.push(range);
+                eventfulRanges.push(eventfulRange);
+                var amadeusRange = {
+                  departureDate: departureDate,
+                  returnDate: returnDate
+                }
+                amadeusRanges.push(amadeusRange)
             }
 
         });
-        console.log(ranges);
+        console.log(amadeusRanges);
+        console.log(eventfulRanges)
         // add to localstorage
-        localStorage.setItem("dateRanges", JSON.stringify(ranges))
+        localStorage.setItem("dateRanges", JSON.stringify(eventfulRanges))
+        localStorage.setItem("dateRanges", JSON.stringify(amadeusRanges))
+        // LETS CONVERT THESE
     });
 
 

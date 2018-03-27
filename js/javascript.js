@@ -1,11 +1,34 @@
+// this file is solely for looking up flights and hotels as soon
+// the user enters their hometown and destinations
+// output is stored in localStorage as localStorage.hotels
+// and localStorage.flights
+var airportCodes = []
 $(window).on("load", function () {
-  console.log("WE're in javascript.js")
-  //Call to Amadeus API for flight price
-
-  //Example URL
-  //"https://api.sandbox.amadeus.com/v1.2/flights/extensive-search?apikey=0COdldqUIjt22sU7ABdhCSSmsYxU4JTa&origin=FRA&destination=LON&departure_date=2018-06-17&one-way=false&duration=7"
-
-  function flightfare() {
+  // search for flights and hotels once the users have enteres all of their cities.
+  $("#dateBtn").on("click", function(){
+    // set time out zero to ensure this function is run after the
+    // function connected to the same click in application.js
+    setTimeout(function(){
+      console.log(localStorage.cities)
+      var destinations = JSON.parse(localStorage.cities)
+      // convert each city object into a clean array of cities
+      var cities = destinations.map(function(destination){
+        return destination.cityName
+      })
+      // and add the origin city, we'll need this airport code too
+      cities.unshift(localStorage.homeCity)
+      // OK, we've got the cities. now lets get airport codes from the city
+      // we'll recursively run getAirportCode until we have them all, pass this function
+      // the list of our cities and an empty list to build the list of codes and
+      // something to do when we've found all the codes (i.e. the callback function)
+      // in this case our callback function will be to actually look up the flights
+      getAirportCode(cities, [], flightfare(origin, destinations))
+    }, 0)
+  })
+  function flightfare(origin, destinations) {
+    console.log("OK, looking for flights now with...")
+    // remove a destination from destinations
+    var destination = destinations.shift()
     var apikey = "?apikey=0COdldqUIjt22sU7ABdhCSSmsYxU4JTa";
     var siteurl = "https://api.sandbox.amadeus.com/v1.2/flights/extensive-search";
     // search parameters
@@ -14,8 +37,10 @@ $(window).on("load", function () {
     // var depdate="&departure_date="+$("#startdt").val(); /* YYYY-mm-dd */
 
     //test data
-    var org = "&origin=NYC";  /* ABC */
-    var dest = "&destination=MIA";  /* XYZ */
+    var org = "&origin=" + origin  /* ABC */
+    var dest = "&destination=" + destination;  /* XYZ */
+    // NEED TO CONVERT THIS DATE
+    
     var depdate = "&departure_date=2018-07-15"; /* YYYY-mm-dd */
     // end of test data
 
@@ -30,35 +55,45 @@ $(window).on("load", function () {
       method: "GET"
     })
       .then(function (response) {
+        if (flights){
+          flights.push(response)
+        }
+        else{
+          var flights = []
+          flights.push(response)
+        }
+        if (destinations.length > 0){
+          flightfare(origin, destinations)
+        }
+        else{
+
+        }
         console.log(response);
       });
   }
-
-  // End of Flight Price
-
-  // *************************************************************************
 
   // Call to Amadeus API for hotel price
 
   // Exaple URL
   // "https://api.sandbox.amadeus.com/v1.2/hotels/search-airport?apikey=0COdldqUIjt22sU7ABdhCSSmsYxU4JTa&location=BOS&check_in=2018-06-15&check_out=2018-06-17&radius=20&currency=usd&number_of_results=10&all_rooms=false"
 
+
   function hotelstay() {
     var apikey = "?apikey=0COdldqUIjt22sU7ABdhCSSmsYxU4JTa";
     var siteurl = "https://api.sandbox.amadeus.com/v1.2/hotels/search-airport"
 
-    // search paramaters
+    // // search paramaters
     // var dest= "&location="+$(city1).val();
     // var checkin = "&check_in="+    /* YYYY-mm-dd */
     // var checkout = "&check_out="+   /* YYYY-mm-dd */
     // var rad = "&radius=" +   /* distance in km */
-
-    // test data
-    var dest = "&location=BOS";
-    var checkin = "&check_in=2018-08-01";    /* YYYY-mm-dd */
-    var checkout = "&check_out=2018-08-07";  /* YYYY-mm-dd */
-    var rad = "&radius=20";   /* distance in km */
-    // end of test data
+    //
+    // // test data
+    // var dest = "&location=BOS";
+    // var checkin = "&check_in=2018-08-01";    /* YYYY-mm-dd */
+    // var checkout = "&check_out=2018-08-07";  /* YYYY-mm-dd */
+    // var rad = "&radius=20";   /* distance in km */
+    // // end of test data
 
     var curr = "&currency=usd";   /* show prices in this currency */
     var rescount = "&number_of_results=10";  /* max number of results */
@@ -77,42 +112,49 @@ $(window).on("load", function () {
 
   }
 
-  // End of Hotel Stay
-
-
-  //**********************************************************************************
-
-
      // // City Autocomplete - 2 functions - Showcity, Autocomplete
-
     // // function showcity sends the correct city and IATA code to the screen
 
-    function showcity(loc,message) {
-      $("#"+loc.id+"resp").text(message);
+  // i supposed this function could be combined with the function that handles the actual API
+  // lookup but its working now and we're pressed for time
+  function getAirportCode(cities, airportCodes, callback){
+    // remove a destination from the list
+    var city = cities.shift()
+    // make the api request with this destination
+    airportCodeLookUp(city, function(airportCode){
+      console.log("airportCode")
+      console.log(airportCode)
+      airportCodes.push(airportCode)
+    })
+    // if we have all of the airportcodes start looking up flights
+    if (cities.length === 0){
+      origin = airportCodes.shift()
+      callback(origin, airportCOdes)
+    }
+    else{
+      getAirportCode(cities, callback)
+    }
   }
 
-  $(".cityComplete").autocomplete({
-      source: function (request, response) {
-          $.ajax({
-              url: "https://api.sandbox.amadeus.com/v1.2/airports/autocomplete",
-              dataType: "json",
-              data: {
-                  apikey: "0COdldqUIjt22sU7ABdhCSSmsYxU4JTa",
-                  term: request.term
-              },
-              success: function (data) {
-                  response(data);
-              }
-          });
-      },
-      minLength: 3,
-      select: function (event, ui) {
-          console.log(ui.item.label);
-          console.log(ui.item.value);
-          showcity(this, ui.item.label);
-      },
-  });
-
-// End of City Autocomplete
-
-});
+  // removed link to the form. now this autocomplete lookup happens in the background when
+  // the user has entered all of their destinations
+    // we pass the function the list of cities
+    // and something to do when it's done (i.e. the callback)
+  function airportCodeLookUp(city, callback){
+    console.log("CITY TO LOOKUP")
+    console.log(city)
+    var url = "https://api.sandbox.amadeus.com/v1.2/airports/autocomplete?"
+      $.ajax({
+        url: "https://api.sandbox.amadeus.com/v1.2/airports/autocomplete?",
+        dataType: "json",
+        data: {
+          apikey: "0COdldqUIjt22sU7ABdhCSSmsYxU4JTa",
+          term: city
+        }
+      })
+      .done(function (data) {
+          console.log("SUCCESS")
+          callback(data.value)
+      })
+  }
+})
