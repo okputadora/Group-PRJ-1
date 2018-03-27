@@ -5,7 +5,7 @@
 $(window).on("load", function () {
   var airportCodes = []
   // search for flights and hotels once the users have enteres all of their cities.
-  $("#cityBtn").on("click", function(){
+  $("#dateBtn").on("click", function(){
     // set time out zero to ensure this function is run after the
     // function connected to the same click in application.js
     setTimeout(function(){
@@ -29,58 +29,76 @@ $(window).on("load", function () {
       // in this case our callback function will be to actually look up the flights
       airportCodeLookUp(cities, function(){
         console.log(airportCodes)
-        // flightfare()
+        getFlights()
       })
     }, 0)
   })
-  function flightfare(origin, destinations) {
+
+
+  function getFlights(){
     console.log("OK, looking for flights now with...")
-    // remove a destination from destinations
-    var destination = destinations.shift()
-    var apikey = "?apikey=0COdldqUIjt22sU7ABdhCSSmsYxU4JTa";
-    var siteurl = "https://api.sandbox.amadeus.com/v1.2/flights/extensive-search";
-    // search parameters
-    // var org= "&origin="+$("#origin").val();  /* ABC */
-    // var dest="&destination="+$("#city1").val();  /* XYZ */
-    // var depdate="&departure_date="+$("#startdt").val(); /* YYYY-mm-dd */
-
     //test data
-    var org = "&origin=" + origin  /* ABC */
-    var dest = "&destination=" + destination;  /* XYZ */
+    var org = "&origin=" + airportCodes[0]  /* ABC */
+    var dest = "&destination=" + airportCodes.pop();  /* XYZ */
     // NEED TO CONVERT THIS DATE
+    var departureDates = JSON.parse(localStorage.departureDates)
+    appendDates(org, dest, departureDates, function(){
+      if (airportCodes.length === 1){
+        // WE GOT ALL THE INFO WE NEED
+        console.log("WE'RE DONE")
+      }
+      else{
+        getFlights()
+      }
+    })
 
-    var depdate = "&departure_date=2018-07-15"; /* YYYY-mm-dd */
-    // end of test data
+  }
+  function appendDates(origin, destination, departureDates, callback){
+    console.log(departureDates)
+    console.log(typeof departureDates)
+    var departureDate = departureDates.shift()
+    var depDate = "&departure_date=" + departureDate; /* YYYY-mm-dd */
+    // end of test data/
 
 
     var type = "&one-way=false"  /* show round trip fare */
     var length = "&duration=7";  /* length of trip */
 
-    var searchurl = siteurl + apikey + org + dest + depdate + type + length;
+    var apikey = "?apikey=0COdldqUIjt22sU7ABdhCSSmsYxU4JTa";
+    var siteurl = "https://api.sandbox.amadeus.com/v1.2/flights/extensive-search";
+    var searchurl = siteurl + apikey + origin + destination + depDate + type + length;
 
     $.ajax({
       url: searchurl,
       method: "GET"
     })
       .then(function (response) {
-        if (flights){
-          flights.push(response)
+        console.log(response)
+        console.log("DEOARTURE DATES LENGTH")
+        console.log(departureDates.length)
+        if (departureDates.length === 0){
+          callback()
         }
         else{
-          var flights = []
-          flights.push(response)
+          appendDates(origin, destination, departureDates, callback)
         }
-        if (destinations.length > 0){
-          flightfare(origin, destinations)
-        }
-        else{
-          console.log("DONE LOOKING FOR FLIGHTS")
-          console.log(flights)
-        }
-        console.log(response);
+        // if (flights){
+        //   flights.push(response)
+        // }
+        // else{
+        //   var flights = []
+        //   flights.push(response)
+        // }
+        // if (destinations.length > 0){
+        //   flightfare(origin, destinations)
+        // }
+        // else{
+        //   console.log("DONE LOOKING FOR FLIGHTS")
+        //   console.log(flights)
+        // }
+        // console.log(response);
       });
   }
-
   // Call to Amadeus API for hotel price
 
   // Exaple URL
