@@ -5,8 +5,8 @@ var api_key = 'qmFPcpp4ZnChQdF5';
   console.log("connected")
     // get the data from local storage
     var cities = JSON.parse(localStorage.cities)
-    var homeCity = JSON.parse(localStorage.dateRanges)
-    var dateRanges = JSON.parse(localStorage.dateRanges)
+    var homeCity = JSON.parse(localStorage.homeCity)
+    var dateRanges = JSON.parse(localStorage.eventfulRanges)
     var interests = JSON.parse(localStorage.interests)
     // build a request URL from the data
     var vacations = []

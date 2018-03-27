@@ -2,10 +2,10 @@
 // the user enters their hometown and destinations
 // output is stored in localStorage as localStorage.hotels
 // and localStorage.flights
-var airportCodes = []
 $(window).on("load", function () {
+  var airportCodes = []
   // search for flights and hotels once the users have enteres all of their cities.
-  $("#dateBtn").on("click", function(){
+  $("#cityBtn").on("click", function(){
     // set time out zero to ensure this function is run after the
     // function connected to the same click in application.js
     setTimeout(function(){
@@ -15,14 +15,22 @@ $(window).on("load", function () {
       var cities = destinations.map(function(destination){
         return destination.cityName
       })
+      console.log("Cities from storage")
+      console.log(cities)
       // and add the origin city, we'll need this airport code too
-      cities.unshift(localStorage.homeCity)
+      var homeCity = localStorage.homeCity
+      cities.unshift(homeCity)
+
+      console.log(cities)
       // OK, we've got the cities. now lets get airport codes from the city
       // we'll recursively run getAirportCode until we have them all, pass this function
       // the list of our cities and an empty list to build the list of codes and
       // something to do when we've found all the codes (i.e. the callback function)
       // in this case our callback function will be to actually look up the flights
-      getAirportCode(cities, [], flightfare(origin, destinations))
+      airportCodeLookUp(cities, function(){
+        console.log(airportCodes)
+        // flightfare()
+      })
     }, 0)
   })
   function flightfare(origin, destinations) {
@@ -40,7 +48,7 @@ $(window).on("load", function () {
     var org = "&origin=" + origin  /* ABC */
     var dest = "&destination=" + destination;  /* XYZ */
     // NEED TO CONVERT THIS DATE
-    
+
     var depdate = "&departure_date=2018-07-15"; /* YYYY-mm-dd */
     // end of test data
 
@@ -66,7 +74,8 @@ $(window).on("load", function () {
           flightfare(origin, destinations)
         }
         else{
-
+          console.log("DONE LOOKING FOR FLIGHTS")
+          console.log(flights)
         }
         console.log(response);
       });
@@ -117,30 +126,13 @@ $(window).on("load", function () {
 
   // i supposed this function could be combined with the function that handles the actual API
   // lookup but its working now and we're pressed for time
-  function getAirportCode(cities, airportCodes, callback){
-    // remove a destination from the list
-    var city = cities.shift()
-    // make the api request with this destination
-    airportCodeLookUp(city, function(airportCode){
-      console.log("airportCode")
-      console.log(airportCode)
-      airportCodes.push(airportCode)
-    })
-    // if we have all of the airportcodes start looking up flights
-    if (cities.length === 0){
-      origin = airportCodes.shift()
-      callback(origin, airportCOdes)
-    }
-    else{
-      getAirportCode(cities, callback)
-    }
-  }
 
   // removed link to the form. now this autocomplete lookup happens in the background when
   // the user has entered all of their destinations
     // we pass the function the list of cities
     // and something to do when it's done (i.e. the callback)
-  function airportCodeLookUp(city, callback){
+  function airportCodeLookUp(cities, callback){
+    var city = cities.shift()
     console.log("CITY TO LOOKUP")
     console.log(city)
     var url = "https://api.sandbox.amadeus.com/v1.2/airports/autocomplete?"
@@ -154,7 +146,15 @@ $(window).on("load", function () {
       })
       .done(function (data) {
           console.log("SUCCESS")
-          callback(data.value)
+          console.log(data[0])
+          var code = data[0].value
+          airportCodes.push(code)
+          if (cities.length === 0){
+            callback()
+          }
+          else{
+            airportCodeLookUp(cities, callback)
+          }
       })
   }
 })
