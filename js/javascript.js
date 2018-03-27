@@ -4,6 +4,7 @@
 // and localStorage.flights
 $(window).on("load", function () {
   var airportCodes = []
+  var fares = []
   // search for flights and hotels once the users have enteres all of their cities.
   $("#dateBtn").on("click", function(){
     // set time out zero to ensure this function is run after the
@@ -46,6 +47,7 @@ $(window).on("load", function () {
       if (airportCodes.length === 1){
         // WE GOT ALL THE INFO WE NEED
         console.log("WE'RE DONE")
+        console.log(fares)
       }
       else{
         getFlights()
@@ -76,7 +78,9 @@ $(window).on("load", function () {
         console.log(response)
         console.log("DEOARTURE DATES LENGTH")
         console.log(departureDates.length)
+        fares.push(response)
         if (departureDates.length === 0){
+
           callback()
         }
         else{
